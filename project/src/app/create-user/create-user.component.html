@@ -1,1 +1,153 @@
-<p>create-user works!</p>
+<div class="container">
+    <mat-card class="mt-2">
+        <mat-card-title>Create User</mat-card-title>
+        <hr>
+        <form class="example-form" [formGroup]="user">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Glenna Reichert" formControlName="name">
+                        <mat-error>
+                            Please enter a valid Name
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>User Name</mat-label>
+                        <input matInput placeholder="Delphine" formControlName="userName">
+                        <mat-error>
+                            Please enter a valid User Name
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Chaim_McDermott@dana.io" formControlName="email">
+                        <mat-error>
+                            Please enter a Email Address
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            
+            <h4>Address:</h4>
+            <div class="row p-2" formGroupName="address">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Street</mat-label>
+                        <input matInput placeholder="Dayna Park" formControlName="street">
+                        <mat-error>
+                            Please enter a valid Street Name
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Suite</mat-label>
+                        <input matInput placeholder="Suite 449" formControlName="suite">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row p-2" formGroupName="address">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>City</mat-label>
+                        <input matInput placeholder="Bartholomebury" formControlName="city">
+                        <mat-error>
+                            Please enter a valid City
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Zip Code</mat-label>
+                        <input matInput placeholder="76495-3109" formControlName="zipcode">
+                        <mat-error>
+                            Please enter a valid Zipcode
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            
+            <h4>Geo:</h4>
+            <div formGroupName="address">
+                <div class="row p-2" formGroupName="geo">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Lat</mat-label>
+                            <input matInput placeholder="24.6563" formControlName="lat">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Lng</mat-label>
+                            <input matInput placeholder="-168.8889" formControlName="lng">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Phone</mat-label>
+                        <input matInput placeholder="7759766794" formControlName="phone">
+                        <mat-error>
+                            Please enter a valid Phone Number
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Website</mat-label>
+                        <input matInput placeholder="conrad.com" formControlName="website">
+                        <mat-error>
+                            Please enter a valid Website
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <h4>Company:</h4>
+            <div class="row p-2" formGroupName="company">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Yost and Sons" formControlName="name">
+                        <mat-error>
+                            Please enter a valid Company Name
+                          </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>CatchPhrase</mat-label>
+                        <input matInput placeholder="Switchable contextually-based projet" formControlName="catchPharse">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Bs</mat-label>
+                        <input matInput placeholder="target end-to-end models" formControlName="bs">
+                    </mat-form-field>
+                </div>
+            </div> 
+            
+            <mat-card-actions>
+                <button mat-raised-button color="primary" style="float: right;" [disabled]="user.invalid" (click)="saveUser()">Create</button>
+            </mat-card-actions>
+        </form>  
+    </mat-card>
+</div>  
+
+
