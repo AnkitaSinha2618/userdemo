@@ -42,10 +42,13 @@ export class CreateUserComponent implements OnInit {
   })
 
   ngOnInit(): void {
+
+    //Getting Id from active URL
     this.activateRoute.params.subscribe(params => {
       this.id = params['id'];
     })
 
+    //If Id is present then getting data from server and setting into form
     if (this.id) {
       this._service.getUser(this.id).subscribe((data: any) => {
         this.user.patchValue(data);
@@ -53,10 +56,7 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-  saveUser() {
-    console.log(this.user.value);
-  }
-
+  //Calling create service to created data to server
   create() {
     this._service.createUser(this.user.value).subscribe(data => {
       console.log(data);
@@ -65,6 +65,7 @@ export class CreateUserComponent implements OnInit {
     this.user.reset();
   }
 
+  //Calling update service for update data to server
   update() {
     this._service.updateUser(this.user.value, this.id).subscribe(data => {
       console.log(data);

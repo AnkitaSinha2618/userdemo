@@ -9,24 +9,27 @@ import { Router } from '@angular/router';
 })
 export class AllUsersComponent implements OnInit {
 
-  constructor(private _service:UserServiceService, private router:Router) { }
-   public users: any = [];
+  constructor(private _service: UserServiceService, private router: Router) { }
+  public users: any = [];
 
   ngOnInit(): void {
-    this._service.getUserList().subscribe((data:any) => {
-      this.users=data;
+    //Getting all user list data
+    this._service.getUserList().subscribe((data: any) => {
+      this.users = data;
     })
   }
 
-  update(id:number){
-    this.router.navigate(['update-user/' +id]);
+  // Navigating to update page for update based on id
+  update(id: number) {
+    this.router.navigate(['update-user/' + id]);
   }
 
-  delete(id:number){
-    if(confirm("Are you sure to delete")){
-      this._service.deleteUser(id).subscribe((data:any) => {
+  //Deleteting data based on id
+  delete(id: number) {
+    if (confirm("Are you sure to delete")) {
+      this._service.deleteUser(id).subscribe((data: any) => {
         console.log("data deleted");
-        
+
       })
     }
   }
