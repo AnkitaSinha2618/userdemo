@@ -1,42 +1,45 @@
 <div class="container">
     <h2>All Users</h2>
     <hr>
-    <mat-card class="mt-2">
+    <mat-card class="mt-2" *ngFor = "let user of users">
         <div class="row">
             <div class="col-lg-4">
                 <h4 class="bg-primary text-white">Users Details:</h4>
                 <ul >
-                    <li>Name:</li>
-                    <li>User Name:</li>
-                    <li>Email:</li>
-                    <li>Phone:</li>
-                    <li>Website</li>
+                    <li><span>Id: </span>{{user.id}}</li>
+                    <li> <span>Name: </span>{{user.name}}</li>
+                    <li> <span>User Name: </span>{{user.username}}</li>
+                    <li><span>Email: </span>{{user.email}}</li>
+                    <li><span>Phone: </span>{{user.phone}}</li>
+                    <li><span>Website: </span>{{user.website}}</li>
 
                 </ul>
             </div>
             <div class="col-lg-4">
                 <h4 class="bg-primary text-white">Address Details:</h4>
                 <ul>
-                    <li>Street:</li>
-                    <li>Suite:</li>
-                    <li>City:</li>
-                    <li>Zip Code:</li>
+                    <li><span>Street: </span>{{user.address.street}}</li>
+                    <li> <span>Suite: </span>{{user.address.suite}}</li>
+                    <li> <span>City: </span>{{user.address.city}}</li>
+                    <li><span>Zip Code: </span>{{user.address.zipcode}}</li>
+                    
+                    <span style="font-weight: bold;">Geo:</span>
                     <ul>
-                        <li>Lat:</li>
-                        <li>Lng:</li>
+                        <li> <span>Lat: </span>{{user.address.geo.lat}}</li>
+                        <li><span>Lng: </span>{{user.address.geo.lng}}</li>
                     </ul>
                 </ul>
             </div>
             <div class="col-lg-4">
                 <h4 class="bg-primary text-white">Company Details:</h4>
                 <ul>
-                    <li>Name:</li>
-                    <li>Catch Phrase:</li>
-                    <li>Bs:</li>
+                    <li><span>Name: </span>{{user.company.name}}</li>
+                    <li><span>Catch Phrase: </span>{{user.company.catchPhrase}}</li>
+                    <li><span>Bs: </span>{{user.company.bs}}</li>
                 </ul>
 
-                <button class="btn btn-success">View/Update</button>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-success" (click)="update(user.id)">Update</button>
+                <button class="btn btn-danger" (click)="delete(user.id)">Delete</button>
             </div>
         </div>   
     </mat-card>

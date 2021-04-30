@@ -1,6 +1,8 @@
 <div class="container">
     <mat-card class="mt-2">
-        <mat-card-title>Create User</mat-card-title>
+        <mat-card-title *ngIf="id==null">Create User</mat-card-title>
+        <mat-card-title *ngIf="id!=null">Update User</mat-card-title>
+
         <hr>
         <form class="example-form" [formGroup]="user">
             <div class="row">
@@ -17,7 +19,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <mat-form-field class="example-full-width">
                         <mat-label>User Name</mat-label>
-                        <input matInput placeholder="Delphine" formControlName="userName">
+                        <input matInput placeholder="Delphine" formControlName="username">
                         <mat-error>
                             Please enter a valid User Name
                         </mat-error>
@@ -144,7 +146,10 @@
             </div> 
             
             <mat-card-actions>
-                <button mat-raised-button color="primary" style="float: right;" [disabled]="user.invalid" (click)="saveUser()">Create</button>
+                <button mat-raised-button color="primary" style="float: right;" [disabled]="user.invalid"
+                 *ngIf="id==null" (click)="create()" >Create</button>
+                <button mat-raised-button color="primary" style="float: right;" [disabled]="user.invalid"
+                 *ngIf="id!=null" (click)="update()">Update</button>
             </mat-card-actions>
         </form>  
     </mat-card>

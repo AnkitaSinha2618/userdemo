@@ -13,6 +13,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { AllUsersComponent } from './all-users/all-users.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import {UserServiceService} from './appServices/user-service.service';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,10 +30,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

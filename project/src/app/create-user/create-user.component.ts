@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { UserServiceService } from '../appServices/user-service.service'
 
 
 @Component({
@@ -9,40 +11,65 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _service: UserServiceService, private activateRoute: ActivatedRoute) { }
 
-  public emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  public id: any;
+  public emailPattern = '^[a-z-A-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
   public user = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    userName: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required,Validators.pattern(this.emailPattern)]),
+    username: new FormControl(null, [Validators.required]),
+    email: new FormControl(null, [Validators.required, Validators.pattern(this.emailPattern)]),
     address: new FormGroup({
-      street : new FormControl(null, [Validators.required]),
-      suite : new FormControl(null,),
-      city : new FormControl(null, [Validators.required]),
-      zipcode : new FormControl(null, [Validators.required]),
-      geo : new FormGroup({
-        lat : new FormControl(null,),
-        lng : new FormControl(null,),
+      street: new FormControl(null, [Validators.required]),
+      suite: new FormControl(null,),
+      city: new FormControl(null, [Validators.required]),
+      zipcode: new FormControl(null, [Validators.required]),
+      geo: new FormGroup({
+        lat: new FormControl(null,),
+        lng: new FormControl(null,),
       }),
     }),
 
     phone: new FormControl(null, [Validators.required]),
     website: new FormControl(null, [Validators.required]),
-    company : new FormGroup({
-      name : new FormControl(null, [Validators.required]),
-      catchPharse : new FormControl(null,),
-      bs : new FormControl(null,),
+    company: new FormGroup({
+      name: new FormControl(null, [Validators.required]),
+      catchPharse: new FormControl(null,),
+      bs: new FormControl(null,),
     }),
 
   })
 
   ngOnInit(): void {
+    this.activateRoute.params.subscribe(params => {
+      this.id = params['id'];
+    })
+
+    if (this.id) {
+      this._service.getUser(this.id).subscribe((data: any) => {
+        this.user.patchValue(data);
+      })
+    }
   }
 
-  saveUser(){
+  saveUser() {
     console.log(this.user.value);
-    
+  }
+
+  create() {
+    this._service.createUser(this.user.value).subscribe(data => {
+      console.log(data);
+      alert("User Creted");
+    });
+    this.user.reset();
+  }
+
+  update() {
+    this._service.updateUser(this.user.value, this.id).subscribe(data => {
+      console.log(data);
+      alert("User Updated");
+    })
+
   }
 }
