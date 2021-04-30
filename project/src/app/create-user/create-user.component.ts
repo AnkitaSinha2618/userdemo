@@ -15,6 +15,7 @@ export class CreateUserComponent implements OnInit {
 
   public id: any;
   public emailPattern = '^[a-z-A-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  public zipcodePattern = '^\\d{5}[\\-]?\\d{4}$';
 
   public user = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -24,7 +25,7 @@ export class CreateUserComponent implements OnInit {
       street: new FormControl(null, [Validators.required]),
       suite: new FormControl(null,),
       city: new FormControl(null, [Validators.required]),
-      zipcode: new FormControl(null, [Validators.required]),
+      zipcode: new FormControl(null, [Validators.required,Validators.pattern(this.zipcodePattern)]),
       geo: new FormGroup({
         lat: new FormControl(null,),
         lng: new FormControl(null,),
