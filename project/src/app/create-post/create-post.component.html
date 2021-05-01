@@ -1,0 +1,46 @@
+<div class="container">
+    <mat-card class="mt-2">
+        <mat-card-title *ngIf="id==null">Create Post</mat-card-title>
+        <mat-card-title *ngIf="id!=null">Update Post</mat-card-title>
+
+        <hr>
+        <form class="example-form" [formGroup]="post">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>User Id</mat-label>
+                        <input matInput placeholder="1" formControlName="userId">
+                        <mat-error>
+                            Please enter a valid User Id
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="qui est esse" formControlName="title">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Body</mat-label>
+                        <input matInput placeholder="quia et suscipit\nsuscipitrecusandae consequuntur expedita et cum\nreprehenderitmolestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet"
+                         formControlName="body">
+                    </mat-form-field>
+                </div>
+            </div>
+
+                        
+            <mat-card-actions>
+                <button mat-raised-button color="primary" style="float: right;" [disabled]="post.invalid"
+                 *ngIf="id==null" (click)="create()" >Create</button>
+                <button mat-raised-button color="primary" style="float: right;" [disabled]="post.invalid"
+                 *ngIf="id!=null" (click)="update()">Update</button>
+            </mat-card-actions>
+        </form>  
+    </mat-card>
+</div>  
+
+
