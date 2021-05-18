@@ -30,6 +30,7 @@
                  *ngIf="id==null" (click)="create()" >Create</button>
                 <button mat-raised-button color="primary" style="float: right;" [disabled]="album.invalid"
                  *ngIf="id!=null" (click)="update()">Update</button>
+                <button mat-raised-button color="accent" style="float: right;" routerLink="/albums" >Back</button>
             </mat-card-actions>
         </form>  
     </mat-card>

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostServiceService } from '../appServices/post-service.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-create-post',
@@ -10,7 +14,7 @@ import { PostServiceService } from '../appServices/post-service.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  constructor(private activateRoute: ActivatedRoute, private _service:PostServiceService) { }
+  constructor(private activateRoute: ActivatedRoute, private _service:PostServiceService,private _snackBar: MatSnackBar,public router:Router) { }
 
   public id: any;
 
@@ -36,11 +40,15 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{duration:3000});    
+  }
+
   //Calling create service to created data to server
   create() {
     this._service.createPost(this.post.value).subscribe((data:any) => {
       console.log(data);
-      alert("post Creted");
+      this.openSnackBar("Post Created Successfully","Create");
     });
     this.post.reset();
   }
@@ -49,7 +57,8 @@ export class CreatePostComponent implements OnInit {
   update() {
     this._service.updatePost(this.post.value, this.id).subscribe((data:any) => {
       console.log(data);
-      alert("Post Updated");
+      this.openSnackBar("Post Updated Successfully","Update");
+      this.router.navigate(['/posts'])
     })
 
   }

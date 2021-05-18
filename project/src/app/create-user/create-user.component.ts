@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserServiceService } from '../appServices/user-service.service'
+import { UserServiceService } from '../appServices/user-service.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,7 +14,7 @@ import { UserServiceService } from '../appServices/user-service.service'
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor(private _service: UserServiceService, private activateRoute: ActivatedRoute) { }
+  constructor(private _service: UserServiceService, private activateRoute: ActivatedRoute,private _snackBar: MatSnackBar,public router:Router) { }
 
   public id: any;
   public emailPattern = '^[a-z-A-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
@@ -57,11 +60,16 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{duration:3000});    
+  }
+
+
   //Calling create service to created data to server
   create() {
     this._service.createUser(this.user.value).subscribe(data => {
       console.log(data);
-      alert("User Creted");
+      this.openSnackBar("User Created Successfully","Create");
     });
     this.user.reset();
   }
@@ -70,7 +78,8 @@ export class CreateUserComponent implements OnInit {
   update() {
     this._service.updateUser(this.user.value, this.id).subscribe(data => {
       console.log(data);
-      alert("User Updated");
+      this.openSnackBar("User Updated Successfully","Update");
+      this.router.navigate(['/users'])
     })
 
   }

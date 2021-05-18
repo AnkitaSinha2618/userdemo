@@ -11,15 +11,21 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
   {path:'', redirectTo:'create-user', pathMatch:'full'},
-  {path:'create-user', component:CreateUserComponent},
-  {path:'update-user/:id', component:CreateUserComponent},
-  {path:'all-users', component:AllUsersComponent},
-  {path:'create-album', component:CreateAlbumComponent},
-  {path:'update-album/:id', component:CreateAlbumComponent},
-  {path:'all-albums', component:AllAlbumsComponent},
-  {path:'create-post', component:CreatePostComponent},
-  {path:'update-post/:id', component:CreatePostComponent},
-  {path:'all-posts', component:AllPostsComponent},
+  {path:'users', children:[
+    {path:'', component:AllUsersComponent},
+    {path:'create',component:CreateUserComponent},
+    {path:'update/:id', component:CreateUserComponent},
+  ]},
+  {path:'albums', children:[
+    {path:'', component:AllAlbumsComponent},
+    {path:'create', component:CreateAlbumComponent},
+    {path:'update/:id', component:CreateAlbumComponent},
+  ]},
+  {path:'posts', children:[
+    {path:'', component:AllPostsComponent},
+    {path:'create', component:CreatePostComponent},
+    {path:'update/:id', component:CreatePostComponent},
+  ]},
   {path:'**', component:PageNotFoundComponent},
 ];
 

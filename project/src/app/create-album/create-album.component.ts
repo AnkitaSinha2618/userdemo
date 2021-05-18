@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { AlbumServiceService } from '../appServices/album-service.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlbumServiceService } from '../appServices/album-service.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 
 
 @Component({
@@ -11,7 +14,7 @@ import { AlbumServiceService } from '../appServices/album-service.service'
 })
 export class CreateAlbumComponent implements OnInit {
 
-  constructor(private activateRoute: ActivatedRoute, private _service:AlbumServiceService) { }
+  constructor(private activateRoute: ActivatedRoute, private _service:AlbumServiceService,private _snackBar: MatSnackBar,public router:Router) { }
 
   public id: any;
 
@@ -35,11 +38,16 @@ export class CreateAlbumComponent implements OnInit {
     }
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{duration:3000});    
+  }
+
+
   //Calling create service to created data to server
   create() {
     this._service.createAlbum(this.album.value).subscribe(data => {
       console.log(data);
-      alert("Album Creted");
+      this.openSnackBar("Album Created Successfully","Create");
     });
     this.album.reset();
   }
@@ -48,9 +56,12 @@ export class CreateAlbumComponent implements OnInit {
   update() {
     this._service.updateAlbum(this.album.value, this.id).subscribe(data => {
       console.log(data);
-      alert("Album Updated");
+      this.openSnackBar("Album Updated Successfully","Update");
+      this.router.navigate(['/albums'])
+
     })
 
   }
+  
 
 }
